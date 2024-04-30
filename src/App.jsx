@@ -50,6 +50,13 @@ function App() {
       return [place, ...prevPickedPlaces];
     });
   }
+  //almacenando lista de ids en local storage
+  const storedIds = JSON.parse(localStorage.getItem('selectedPlaces')) || [];
+  if (storedIds.indexOf(id) === -1){
+    localStorage.setItem(
+        'selectedPlaces',
+        JSON.stringify(storedIds.filter((id) => !== selectedPlace.current))); //si es true se elimina
+  }
 
   function handleRemovePlace() {
     setPickedPlaces((prevPickedPlaces) =>
